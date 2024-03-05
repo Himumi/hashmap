@@ -1,4 +1,4 @@
-class HashMap 
+class HashMap
   def initialize
     @buckets = Array.new(16)
   end
@@ -17,7 +17,7 @@ class HashMap
 
     index = hash(key) % @buckets.length
     valid_index?(index)
-    
+
     @buckets[index] = [] if @buckets[index].nil?
     is_exist = @buckets[index].find { |item| item[0] == key }
 
@@ -26,9 +26,8 @@ class HashMap
 
   def get(key)
     index = hash(key) % @buckets.length
-    valid_index?(index) 
-
-    item = @buckets[index].find { |item| item[0] == key }[1]
+    valid_index?(index)
+    @buckets[index].find { |item| item[0] == key }[1]
   end
 
   def has(key)
@@ -37,10 +36,10 @@ class HashMap
 
   def remove(key)
     index = hash(key) % @buckets.length
-    valid_index?(index) 
+    valid_index?(index)
 
-    item_index = @buckets[index].find_index { |item| item[0] == key}
-    @buckets.delete_at(item_index)
+    item_index = @buckets[index].find_index { |item| item[0] == key }
+    @buckets[index].delete_at(item_index)
   end
 
   def clear
@@ -64,6 +63,7 @@ class HashMap
   end
 
   protected
+
   def load_factor
     length.to_f / @buckets.length
   end
@@ -80,15 +80,16 @@ class HashMap
   end
 end
 
-
 hash = HashMap.new
 
-puts hash.set("Himumi", 10)
-puts hash.set("Himumi", 9)
-puts hash.get("Himumi")
+puts hash.set('Himumi', 10)
+puts hash.set('Himumi', 9)
+puts hash.set('hai', 5)
+puts hash.get('Himumi')
 
-puts hash.has("Himumi")
-puts hash.keys
-puts hash.values
+puts hash.remove('hai')
+puts hash.has('Himumi')
+p hash.keys
+p hash.values
 p hash.entries
 p hash.length
